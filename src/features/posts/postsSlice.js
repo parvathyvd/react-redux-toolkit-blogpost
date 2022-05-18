@@ -40,7 +40,7 @@ const postsSlice = createSlice({
     },
     addReactions: (state, action) => {
       const { postId, reaction } = action.payload;
-      console.log("postId", postId, reaction);
+      //  console.log("postId", postId, reaction);
 
       const existingItem = state.find((post) => post.postId === postId);
 

@@ -27,9 +27,6 @@ const AddPost = () => {
 
   const onAddPost = (e) => {
     e.preventDefault();
-    console.log(e.target);
-    console.log(title);
-    console.log(content);
 
     dispatch(
       addPosts({
@@ -51,6 +48,7 @@ const AddPost = () => {
     setContent("");
     setUserId("");
   };
+  const canSave = title !== "" && content !== "" && userId !== "";
   return (
     <div className="add-post">
       <form>
@@ -85,7 +83,12 @@ const AddPost = () => {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        <button type="button" className="btn-add" onClick={onAddPost}>
+        <button
+          type="button"
+          className="btn-add"
+          onClick={onAddPost}
+          disabled={!canSave}
+        >
           {" "}
           Add Post
         </button>

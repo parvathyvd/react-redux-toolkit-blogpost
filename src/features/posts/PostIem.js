@@ -5,7 +5,7 @@ import PostReactions from "./PostReactions";
 import TimeAgo from "./TimeAgo";
 
 const PostIem = ({ post }) => {
-  const { title, content, userId, postId, date } = post;
+  const { title, content, userId, date } = post;
 
   const users = useSelector(selectAllUsers);
 
@@ -21,7 +21,6 @@ const PostIem = ({ post }) => {
           <TimeAgo timeStamp={date} />
         </h4>
       </div>
-
       <PostReactions post={post} />
     </div>
   );

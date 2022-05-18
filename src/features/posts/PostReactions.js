@@ -12,7 +12,7 @@ const reactionEmoji = {
 const PostReactions = ({ post }) => {
   const dispatch = useDispatch();
   const reactionAdded = (postId, reaction) => {
-    console.log(postId, reaction);
+    //console.log(postId, reaction);
     dispatch(addReactions(postId, reaction));
   };
 
