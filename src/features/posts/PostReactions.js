@@ -11,17 +11,15 @@ const reactionEmoji = {
 
 const PostReactions = ({ post }) => {
   const dispatch = useDispatch();
-  const reactionAdded = (postId, reaction) => {
-    //console.log(postId, reaction);
-    dispatch(addReactions(postId, reaction));
-  };
 
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
     return (
       <button
         key={name}
         type="button"
-        onClick={() => reactionAdded({ postId: post.postId, reaction: name })}
+        onClick={() =>
+          dispatch(addReactions({ postId: post.id, reaction: name }))
+        }
       >
         <span className="emoji">{emoji}</span>
         <span className="num">{post.reactions[name]}</span>

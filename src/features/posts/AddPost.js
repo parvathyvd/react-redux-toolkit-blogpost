@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { addPosts } from "../posts/postsSlice";
-import { nanoid } from "@reduxjs/toolkit";
+import { addNewPost } from "../posts/postsSlice";
 import { useDispatch } from "react-redux";
 import { selectAllUsers } from "../users/userSlice";
 import { useSelector } from "react-redux";
@@ -10,6 +9,10 @@ const AddPost = () => {
   const [content, setContent] = useState("");
   const users = useSelector(selectAllUsers);
   const [userId, setUserId] = useState("");
+  const [addRequestStatus, setAddRequestStatus] = useState("idle");
+
+  const canSave =
+    [title, content, userId].every(Boolean) && addRequestStatus === "idle";
 
   const renderUsers = users.map((user) => {
     return (
@@ -27,28 +30,19 @@ const AddPost = () => {
 
   const onAddPost = (e) => {
     e.preventDefault();
-
-    dispatch(
-      addPosts({
-        postId: nanoid(),
-        title: title,
-        content: content,
-        userId: userId,
-        date: new Date().toISOString(),
-        reactions: {
-          thumbsUp: 0,
-          wow: 0,
-          heart: 0,
-          rocket: 0,
-          coffee: 0,
-        },
-      })
-    );
-    setTitle("");
-    setContent("");
-    setUserId("");
+    if (canSave) {
+      try {
+        dispatch(addNewPost({ title, body: content, userId }));
+        setTitle("");
+        setContent("");
+        setUserId("");
+      } catch (err) {
+        console.log("Failed to fetch post", err);
+      } finally {
+        setAddRequestStatus("idle");
+      }
+    }
   };
-  const canSave = title !== "" && content !== "" && userId !== "";
   return (
     <div className="add-post">
       <form>

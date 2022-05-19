@@ -5,7 +5,7 @@ import PostReactions from "./PostReactions";
 import TimeAgo from "./TimeAgo";
 
 const PostIem = ({ post }) => {
-  const { title, content, userId, date } = post;
+  const { title, body, userId, date } = post;
 
   const users = useSelector(selectAllUsers);
 
@@ -14,7 +14,7 @@ const PostIem = ({ post }) => {
   return (
     <div className="post-item">
       <h1>{title}</h1>
-      <h2>{content}</h2>
+      <h2>{body.substring(0, 100)}</h2>
       <div className="author-details">
         {author ? <h3>{author.name}</h3> : <h3>Unknown Author</h3>}
         <h4>
