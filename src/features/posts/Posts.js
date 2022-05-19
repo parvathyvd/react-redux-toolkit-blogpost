@@ -11,7 +11,7 @@ import {
 const Posts = () => {
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
-  console.log("posts are", posts);
+  // console.log("posts are", posts);
   const status = useSelector(selectAllStatus);
   const error = useSelector(selectAllError);
 
